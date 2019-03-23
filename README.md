@@ -1,0 +1,1 @@
+This is homework 2 - the word guessing game. It's basically hangman with a theme of our choosing.
