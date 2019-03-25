@@ -1,10 +1,10 @@
 var guessingGame = {
     lettersGuessed: [],
-    guessWords: ["jordan", "pippen", "kerr", "grant", "hodges"],
+    guessWords: ["jordan", "pippen", "kerr", "grant", "hodges", "rodman", "cartwright"],
     word: "",
     maxGuesses: 10,
     guesses: 0,
-    displayWord: "____",
+    displayWord: "",
     wins: 0,
     losses: 0,
 
@@ -16,7 +16,11 @@ var guessingGame = {
     setLettersGuessed: function (text) {
         this.lettersGuessed = text;
         var lg = document.getElementById("lettersGuessed");
-        lg.textContent = "Letters Guessed: " + text;
+        var temp = "";
+        for (var i = 0; i < text.length; i++) {
+            temp += text[i] + " ";
+        }
+        lg.textContent = "Letters Guessed: " + temp;
     },
 
     setDisplayWord: function (text) {
@@ -63,46 +67,64 @@ var guessingGame = {
         this.setLettersGuessed(this.lettersGuessed);
     },
 
+    checkGuess: function (key) {
+        // See if they guessed a letter(s) correctly
+        var index = 0;
+        index = word.indexOf(key);
+        if (index !== -1) {
+            console.log("You guessed right!");
+            // Make sure we get all occurrences of the letter
+            while (index !== -1) {
+                this.displayWord = setCharAt(this.displayWord, index, key);
+                index = word.indexOf(key, index + 1);
+            }
+            this.setDisplayWord(this.displayWord);
+        } else {
+            console.log("You guessed wrong!");
+        }
+        console.log(this.displayWord);
+    },
+
+    isWon: function () {
+        return this.displayWord.indexOf("_") === -1;
+    },
+
+    isLost: function () {
+        return this.guesses <= 0;
+    },
+
+    checkWinLoss: function () {
+        // See if they won or lost
+        if (this.isWon()) {
+            console.log("You win!!!");
+            this.setGameText("You won!!! Press any key to play again.");
+            this.setWins(++this.wins);
+        } else {
+            this.setGuesses(--this.guesses);
+            console.log("Guesses left: " + this.guesses);
+            if (this.guesses <= 0) {
+                console.log("You lost!!!");
+                this.setGameText("You lost. Better luck next time. Press any key to play again.");
+                this.setLosses(++this.losses);
+            }
+        }
+    },
+
     processGuess: function (key) {
+        if (this.isWon() || this.isLost()) {
+            this.reset();
+        }
+        this.setGameText("Good luck!!!");
         if (this.lettersGuessed.indexOf(key) === -1) {
             // User guessed a letter they haven't guessed before
             this.lettersGuessed.push(key);
             console.log(this.lettersGuessed);
             this.setLettersGuessed(this.lettersGuessed);
 
-            // See if they guessed a letter correctly
-            var index = 0;
-            index = word.indexOf(key);
-            if (index !== -1) {
-                console.log("You guessed right!");
-                // Make sure we get all occurrences of the letter
-                while (index !== -1) {
-                    this.displayWord = setCharAt(this.displayWord, index, key);
-                    index = word.indexOf(key, index + 1);
-                }
-                this.setDisplayWord(this.displayWord);
-            } else {
-                console.log("You guessed wrong!");
-            }
-            console.log(this.displayWord);
+            this.checkGuess(key);
 
-            // See if they won or lost
-            if (this.displayWord.indexOf("_") === -1) {
-                console.log("You win!!!");
-                this.setGameText("You won!!!");
-                this.setWins(++this.wins);
-                this.reset();
-            } else {
-                this.setGuesses(--this.guesses);
-                console.log("Guesses left: " + this.guesses);
-                if (this.guesses <= 0) {
-                    console.log("You lost!!!");
-                    this.setGameText("You lost. Better luck next time.");
-                    this.losses++;
-                    this.setLosses(this.losses);
-                    this.reset();
-                }
-            }
+            this.checkWinLoss();
+
             console.log("===============");
         } else {
             console.log("User already guessed: " + key);
