@@ -1,6 +1,6 @@
 var guessingGame = {
     lettersGuessed: [],
-    guessWords: ["jordan", "pippen", "kerr", "grant", "hodges", "rodman", "cartwright"],
+    guessWords: ["payton", "ditka", "urlacher", "grange", "mcmahon", "singletary", "wilson", "dent", "hampton   "],
     word: "",
     maxGuesses: 10,
     guesses: 0,
