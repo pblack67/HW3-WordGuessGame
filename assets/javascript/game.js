@@ -42,6 +42,12 @@ var guessingGame = {
         winElement.textContent = "Wins: " + numWins;
     },
 
+    setLosses: function (numLosses) {
+        this.losses = numLosses;
+        var lossElement = document.getElementById("losses");
+        lossElement.textContent = "Losses: " + numLosses;
+    },
+
     reset: function () {
         word = this.guessWords[Math.floor(Math.random() * this.guessWords.length)];
         this.displayWord = "";
@@ -59,14 +65,17 @@ var guessingGame = {
 
     processGuess: function (key) {
         if (this.lettersGuessed.indexOf(key) === -1) {
+            // User guessed a letter they haven't guessed before
             this.lettersGuessed.push(key);
             console.log(this.lettersGuessed);
             this.setLettersGuessed(this.lettersGuessed);
 
+            // See if they guessed a letter correctly
             var index = 0;
             index = word.indexOf(key);
             if (index !== -1) {
                 console.log("You guessed right!");
+                // Make sure we get all occurrences of the letter
                 while (index !== -1) {
                     this.displayWord = setCharAt(this.displayWord, index, key);
                     index = word.indexOf(key, index + 1);
@@ -77,21 +86,20 @@ var guessingGame = {
             }
             console.log(this.displayWord);
 
+            // See if they won or lost
             if (this.displayWord.indexOf("_") === -1) {
                 console.log("You win!!!");
                 this.setGameText("You won!!!");
-                this.wins++;
-                this.setWins(this.wins);
+                this.setWins(++this.wins);
                 this.reset();
             } else {
-                this.guesses--;
+                this.setGuesses(--this.guesses);
                 console.log("Guesses left: " + this.guesses);
-                this.setGuesses(this.guesses);
                 if (this.guesses <= 0) {
                     console.log("You lost!!!");
                     this.setGameText("You lost. Better luck next time.");
                     this.losses++;
-                    // updateLosses(losses);
+                    this.setLosses(this.losses);
                     this.reset();
                 }
             }
