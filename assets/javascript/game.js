@@ -1,6 +1,6 @@
 var guessingGame = {
     lettersGuessed: [],
-    guessWords: ["payton", "ditka", "urlacher", "grange", "mcmahon", "singletary", "wilson", "dent", "hampton   "],
+    guessWords: ["payton", "ditka", "urlacher", "grange", "mcmahon", "singletary", "wilson", "dent", "hampton"],
     word: "",
     maxGuesses: 10,
     guesses: 0,
@@ -113,9 +113,8 @@ var guessingGame = {
     processGuess: function (key) {
         if (this.isWon() || this.isLost()) {
             this.reset();
-        }
-        this.setGameText("Good luck!!!");
-        if (this.lettersGuessed.indexOf(key) === -1) {
+            this.setGameText("Good luck!!!");
+        } else if (this.lettersGuessed.indexOf(key) === -1) {
             // User guessed a letter they haven't guessed before
             this.lettersGuessed.push(key);
             console.log(this.lettersGuessed);
