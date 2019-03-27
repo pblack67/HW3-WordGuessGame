@@ -65,6 +65,8 @@ var guessingGame = {
 
         this.lettersGuessed = [];
         this.setLettersGuessed(this.lettersGuessed);
+
+        document.getElementById("bearspic").style.visibility = "hidden";
     },
 
     checkGuess: function (key) {
@@ -99,6 +101,7 @@ var guessingGame = {
             console.log("You win!!!");
             this.setGameText("You won!!! Press any key to play again.");
             this.setWins(++this.wins);
+            document.getElementById("bearspic").style.visibility = "visible";
         } else {
             this.setGuesses(--this.guesses);
             console.log("Guesses left: " + this.guesses);
