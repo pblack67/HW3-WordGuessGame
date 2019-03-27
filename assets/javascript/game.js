@@ -1,6 +1,12 @@
+// From Stackoverflow: https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
+function setCharAt(str, index, chr) {
+    if (index > str.length - 1) return str;
+    return str.substr(0, index) + chr + str.substr(index + 1);
+}
+
 var guessingGame = {
     lettersGuessed: [],
-    guessWords: ["payton", "ditka", "urlacher", "grange", "mcmahon", "singletary", "wilson", "dent", "hampton"],
+    guessWords: ["payton", "ditka", "urlacher", "grange", "mcmahon", "singletary", "wilson", "dent", "hampton", "thayer", "tomczak", "sayers", "nagurski", "luckman", "halas", "tillman", "perry", "piccolo", "george", "blanda"],
     word: "",
     maxGuesses: 10,
     guesses: 0,
@@ -133,14 +139,6 @@ var guessingGame = {
         }
     }
 }
-
-
-// From Stackoverflow: https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
-function setCharAt(str, index, chr) {
-    if (index > str.length - 1) return str;
-    return str.substr(0, index) + chr + str.substr(index + 1);
-}
-
 
 document.onkeyup = function (event) {
     var keyPressed = event.key.toLowerCase();
