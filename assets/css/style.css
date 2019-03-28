@@ -1,7 +1,9 @@
 * {
-    color: darkblue;
+    color: white;
 }
 
 body {
-    background-color: darkorange;
+    background-image: url('../images/IMG_250957.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
