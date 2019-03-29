@@ -109,6 +109,7 @@ var guessingGame = {
             this.setGameText("You won!!! Press any key to play again.");
             this.setWins(++this.wins);
             document.getElementById("bearspic").style.visibility = "visible";
+            document.getElementById("beardown").play();
         } else {
             this.setGuesses(--this.guesses);
             console.log("Guesses left: " + this.guesses);
