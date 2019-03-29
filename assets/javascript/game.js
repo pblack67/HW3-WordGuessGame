@@ -7,6 +7,7 @@ function setCharAt(str, index, chr) {
 var guessingGame = {
     lettersGuessed: [],
     guessWords: ["payton", "ditka", "urlacher", "grange", "mcmahon", "singletary", "wilson", "dent", "hampton", "thayer", "tomczak", "sayers", "nagurski", "luckman", "halas", "tillman", "perry", "piccolo", "george", "blanda"],
+    letters: ['a', 'b', "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
     word: "",
     maxGuesses: 10,
     guesses: 0,
@@ -111,32 +112,37 @@ var guessingGame = {
         } else {
             this.setGuesses(--this.guesses);
             console.log("Guesses left: " + this.guesses);
-            if (this.guesses <= 0) {
+            if (this.isLost()) {
                 console.log("You lost!!!");
-                this.setGameText("You lost. Better luck next time. Press any key to play again.");
+                this.setGameText("You lost. Press any key to play again.");
                 this.setLosses(++this.losses);
             }
         }
+    },
+
+    isLetter: function(key) {
+        return this.letters.indexOf(key) !== -1;
+    },
+
+    isGuessed: function(key) {
+        return this.lettersGuessed.indexOf(key) !== -1;
     },
 
     processGuess: function (key) {
         if (this.isWon() || this.isLost()) {
             this.reset();
             this.setGameText("Good luck!!!");
-        } else if (this.lettersGuessed.indexOf(key) === -1) {
-            // User guessed a letter they haven't guessed before
+        } else if (!this.isGuessed(key) && this.isLetter(key)) {
             this.lettersGuessed.push(key);
             console.log(this.lettersGuessed);
             this.setLettersGuessed(this.lettersGuessed);
-
             this.checkGuess(key);
-
             this.checkWinLoss();
-
-            console.log("===============");
         } else {
-            console.log("User already guessed: " + key);
-        }
+            console.log("Invalid key: " + key);
+        }        
+        console.log("===============");
+
     }
 }
 
