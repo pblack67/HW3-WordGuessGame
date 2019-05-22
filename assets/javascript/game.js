@@ -4,7 +4,7 @@ function setCharAt(str, index, chr) {
     return str.substr(0, index) + chr + str.substr(index + 1);
 }
 
-var guessingGame = {
+let guessingGame = {
     lettersGuessed: [],
     guessWords: ["payton", "ditka", "urlacher", "grange", "mcmahon", "singletary", "wilson", "dent", "hampton", "thayer", "tomczak", "sayers", "nagurski", "luckman", "halas", "tillman", "perry", "piccolo", "george", "blanda"],
     letters: ['a', 'b', "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
@@ -16,15 +16,15 @@ var guessingGame = {
     losses: 0,
 
     setGameText: function (text) {
-        var gt = document.getElementById("gameText");
+        let gt = document.getElementById("gameText");
         gt.textContent = text;
     },
 
     setLettersGuessed: function (text) {
         this.lettersGuessed = text;
-        var lg = document.getElementById("lettersGuessed");
-        var temp = "";
-        for (var i = 0; i < text.length; i++) {
+        let lg = document.getElementById("lettersGuessed");
+        let temp = "";
+        for (let i = 0; i < text.length; i++) {
             temp += text[i] + " ";
         }
         lg.textContent = "Letters Guessed: " + temp;
@@ -32,9 +32,9 @@ var guessingGame = {
 
     setDisplayWord: function (text) {
         this.displayWord = text;
-        var dw = document.getElementById("displayWord");
-        var temp = "";
-        for (var i = 0; i < text.length; i++) {
+        let dw = document.getElementById("displayWord");
+        let temp = "";
+        for (let i = 0; i < text.length; i++) {
             temp += text.charAt(i) + " ";
         }
         dw.textContent = temp;
@@ -42,27 +42,27 @@ var guessingGame = {
 
     setGuesses: function (numGuesses) {
         this.guesses = numGuesses;
-        var gl = document.getElementById("guessesRemaining");
+        let gl = document.getElementById("guessesRemaining");
         gl.textContent = "Guesses Remaining: " + numGuesses;
 
     },
 
     setWins: function (numWins) {
         this.wins = numWins;
-        var winElement = document.getElementById("wins");
+        let winElement = document.getElementById("wins");
         winElement.textContent = "Wins: " + numWins;
     },
 
     setLosses: function (numLosses) {
         this.losses = numLosses;
-        var lossElement = document.getElementById("losses");
+        let lossElement = document.getElementById("losses");
         lossElement.textContent = "Losses: " + numLosses;
     },
 
     reset: function () {
         word = this.guessWords[Math.floor(Math.random() * this.guessWords.length)];
         this.displayWord = "";
-        for (var i = 0; i < word.length; i++) {
+        for (let i = 0; i < word.length; i++) {
             this.displayWord += "_";
         }
         this.setDisplayWord(this.displayWord);
@@ -78,7 +78,7 @@ var guessingGame = {
 
     checkGuess: function (key) {
         // See if they guessed a letter(s) correctly
-        var index = 0;
+        let index = 0;
         index = word.indexOf(key);
         if (index !== -1) {
             console.log("You guessed right!");
@@ -148,7 +148,7 @@ var guessingGame = {
 }
 
 document.onkeyup = function (event) {
-    var keyPressed = event.key.toLowerCase();
+    let keyPressed = event.key.toLowerCase();
     console.log("User pressed: " + keyPressed);
     guessingGame.processGuess(keyPressed);
 }
