@@ -2,6 +2,8 @@
 
 * URL: [https://pblack67.github.io/WordGuessGame/](https://pblack67.github.io/WordGuessGame/)
 
+![Word Game](/images/wordgame.png)
+
 * Technologies: HTML, CSS, Bootstrap, JavaScript, Events, Objects
 
 ## Overview
